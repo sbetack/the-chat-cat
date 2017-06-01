@@ -5,5 +5,17 @@
   <%= @chatroom.name %>
 </p>
 
-<%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |
-<%= link_to 'Back', chatrooms_path %>
+<div data-behavior='messages'>
+<!-- refactor the thing below -->
+   <% @chatroom.messages.order(created_at: :desc).limit(100).reverse.each do |message| %>
+    <div>
+      <strong><%=message.user.username%></strong>
+        <%= message.body %>
+    </div>
+   <% end %>
+</div>
+
+<%= form_for [@chatroom, Message.new], remote: true do |f| %>
+  <%= f.text_area :body, row: 1, class: 'form-control', autofocus: true%>
+  <%= f.submit %>
+<% end %>

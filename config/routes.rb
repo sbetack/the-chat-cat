@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   devise_for :installs
-  resources :chatrooms
+  resources :chatrooms do 
+    resource :chatroom_users
+    resources :messages
+  end
   
 end
