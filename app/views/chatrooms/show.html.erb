@@ -6,12 +6,9 @@
 </p>
 
 <div data-behavior='messages'>
-<!-- refactor the thing below -->
+<!-- refactor the thing below to be in the controller or model -->
    <% @chatroom.messages.order(created_at: :desc).limit(100).reverse.each do |message| %>
-    <div>
-      <strong><%=message.user.username%></strong>
-        <%= message.body %>
-    </div>
+    <%= render message %>
    <% end %>
 </div>
 

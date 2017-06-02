@@ -1,14 +1,13 @@
 class MessagesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
   before_action :set_chatroom
   
   def create
-   message = @chatroom.messages.new(message_params)
-   message.user = current_user
-   if message.save
-    redirect_to @chatroom 
-   else
-   end
+    message = @chatroom.messages.new(message_params)
+    message.user = current_user
+    message.save
+    MessageRelayJob.perform_later(message)
   end
 
   def new 

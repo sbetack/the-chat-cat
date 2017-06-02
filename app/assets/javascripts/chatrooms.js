@@ -1,8 +1,8 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
   $('#new_message').on('keypress', function(e){
-    console.log(e.keyCode)
     if(e && e.keyCode == 13) {
       e.preventDefault();
+      console.log($(this));
       $(this).submit();
     }
   })
