@@ -9,4 +9,5 @@ Rails.application.routes.draw do
     resources :messages
   end
   
+  # mount ActionCable.server, at: '/cable'
 end
