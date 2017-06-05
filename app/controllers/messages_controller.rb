@@ -8,6 +8,9 @@ class MessagesController < ApplicationController
     message.user = current_user
     message.save
     MessageRelayJob.perform_later(message)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def new 
